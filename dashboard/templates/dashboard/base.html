@@ -16,6 +16,7 @@
     <link rel="stylesheet" type="text/css" href="{% static 'dashboard/css/vendors.css' %}"/>
     <!-- app style -->
     <link rel="stylesheet" type="text/css" href="{% static 'dashboard/css/style.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'dashboard/css/main.css' %}"/>
 </head>
 <body>
 <!-- begin app -->
@@ -68,10 +69,18 @@
 <!-- end app -->
 
 <!-- plugins -->
+<script src="{% static 'dashboard/js/jquery.min.js' %}"></script>
 <script src="{% static 'dashboard/js/vendors.js' %}"></script>
 
 <!-- custom app -->
 <script src="{% static 'dashboard/js/app.js' %}"></script>
+<script>
+    setTimeout(function () {
+        if ($('#msg').length > 0) {
+            $('#msg').remove();
+        }
+    }, 3000)
+</script>
 </body>
 
 

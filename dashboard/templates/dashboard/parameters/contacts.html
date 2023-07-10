@@ -5,6 +5,7 @@
     <div class="app-main" id="main">
         <div class="container-fluid">
             <div class="row">
+                {% include 'inc/message.html' %}
                 <div class="col-md-12 m-b-30">
                     <div class="d-block d-lg-flex flex-nowrap align-items-center">
                         <div class="page-title mr-4 pr-4 border-right">
@@ -28,6 +29,7 @@
                         <div class="card-header">
                             <div class="card-heading">
                                 <h4 class="card-title">Telefon nömrələri</h4>
+                                <a class="btn btn-xs btn-success mt-2" href="{% url 'dashboard:addphone' %}">Yeni nomre</a>
                             </div>
                         </div>
                         <div class="card-body">
@@ -35,25 +37,25 @@
                                 <table class="table mb-0">
                                     <thead class="thead-light">
                                     <tr>
-                                        <th scope="col">ID</th>
+
                                         <th scope="col">Nömrə</th>
                                         <th scope="col"></th>
                                         <th scope="col"></th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr>
                                         {% for phone in phones %}
-                                        <th scope="row">{{ phone.id }}</th>
+                                    <tr>
+
                                         <th scope="row">{{ phone.phone }}</th>
-                                        <th scope="row btn_cell">
-                                        <a href="" class="btn btn-icon btn-xs btn-primary"><i class="fa fa-home"></i></a>
+                                        <th scope="row" class="btn_cell">
+                                        <a href="{% url 'dashboard:number-update' phone.pk %}" class="btn btn-icon btn-xs btn-info"><i class="fa fa-pencil"></i></a>
                                         </th>
-                                        <th scope="row btn_cell">
-                                        <a href="" class="btn btn-icon btn-xs btn-primary"><i class="fa fa-home"></i></a>
+                                        <th scope="row" class="btn_cell">
+                                        <a href="{% url 'dashboard:deletephone' phone.pk %}" class="btn btn-icon btn-xs btn-danger"><i class="fa fa-trash"></i></a>
                                         </th>
-                                        {% endfor %}
                                     </tr>
+                                        {% endfor %}
                                     </tbody>
                                 </table>
                             </div>
