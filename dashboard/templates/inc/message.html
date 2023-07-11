@@ -1,7 +1,7 @@
 <div class="col-4">
     {% if messages %}
     {% for message in messages %}
-    <div class="alert {{ message.tags }} alert alert-success alert-icon" role="alert" id="msg">
+    <div class="alert {{ message.tags }} alert alert-icon alert-inverse-success" role="alert" id="msg">
         {{ message }}
     </div>
     {% endfor %}

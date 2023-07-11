@@ -14,9 +14,12 @@
                         <div class="breadcrumb-bar align-items-center">
                             <nav>
                                 <ol class="breadcrumb p-0 m-b-0">
-                                    <li class="breadcrumb-item"><a href=""><i class="ti ti-home"></i></a></li>
-                                    <li class="breadcrumb-item">Dashboard</li>
-                                    <li class="breadcrumb-item active text-primary" aria-current="page">Default</li>
+                                    <li class="breadcrumb-item"><a href="{% url 'dashboard:index' %}"><i
+                                            class="ti ti-home"></i></a></li>
+
+                                    <li class="breadcrumb-item active text-primary" aria-current="page">Əlaqə
+                                        məlumatları
+                                    </li>
                                 </ol>
                             </nav>
                         </div>
@@ -26,165 +29,170 @@
             <div class="row">
                 <div class="col-12 col-lg-6">
                     <div class="card card-statistics">
-                        <div class="card-header">
+                        <div class="card-header add-btn">
                             <div class="card-heading">
-                                <h4 class="card-title">Telefon nömrələri</h4>
-                                <a class="btn btn-xs btn-success mt-2" href="{% url 'dashboard:addphone' %}">Yeni nomre</a>
+                                <h4 class="text-secondary">Əlaqə məlumatları</h4>
                             </div>
+                            <a class="btn btn-square btn-xs btn-success" href="{% url 'dashboard:addcontact' %}">Yeni
+                                əlaqə</a>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table class="table mb-0">
                                     <thead class="thead-light">
                                     <tr>
+                                        <th scope="col">Ünvan</th>
+                                        <th scope="col"></th>
+                                        <th scope="col"></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for parameter in parameters %}
+                                        <tr>
+                                            <th scope="row">{{ parameter.address }}</th>
+                                            <th scope="row" class="btn_cell">
+                                                <a href="{% url 'dashboard:numberupdate' parameter.pk %}"
+                                                   class="btn btn-icon btn-square btn-success btn-xs"><i
+                                                        class="fa fa-pencil"></i></a>
+                                            </th>
+                                            <th scope="row" class="btn_cell">
+                                                <a href="{% url 'dashboard:deletephone' parameter.pk %}"
+                                                   class="btn btn-icon btn-square btn-danger btn-xs"><i
+                                                        class="fa fa-trash"></i></a>
+                                            </th>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
+                <div class="col-12 col-lg-6">
+                    <div class="card card-statistics">
+                        <div class="card-header add-btn">
+                            <div class="card-heading">
+                                <h4 class="text-secondary">Telefon nömrələri</h4>
+                            </div>
+                            <a class="btn btn-square btn-xs btn-success" href="{% url 'dashboard:addphone' %}">Yeni
+                                nömrə</a>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table mb-0">
+                                    <thead class="thead-light">
+                                    <tr>
                                         <th scope="col">Nömrə</th>
                                         <th scope="col"></th>
                                         <th scope="col"></th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                        {% for phone in phones %}
-                                    <tr>
+                                    {% for phone in phones %}
+                                        <tr>
+                                            <th scope="row">{{ phone.phone }}</th>
+                                            <th scope="row" class="btn_cell">
+                                                <a href="{% url 'dashboard:numberupdate' phone.pk %}"
+                                                   class="btn btn-icon btn-square btn-success btn-xs"><i
+                                                        class="fa fa-pencil"></i></a>
+                                            </th>
+                                            <th scope="row" class="btn_cell">
+                                                <a href="{% url 'dashboard:deletephone' phone.pk %}"
+                                                   class="btn btn-icon btn-square btn-danger btn-xs"><i
+                                                        class="fa fa-trash"></i></a>
+                                            </th>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-                                        <th scope="row">{{ phone.phone }}</th>
-                                        <th scope="row" class="btn_cell">
-                                        <a href="{% url 'dashboard:number-update' phone.pk %}" class="btn btn-icon btn-xs btn-info"><i class="fa fa-pencil"></i></a>
-                                        </th>
-                                        <th scope="row" class="btn_cell">
-                                        <a href="{% url 'dashboard:deletephone' phone.pk %}" class="btn btn-icon btn-xs btn-danger"><i class="fa fa-trash"></i></a>
-                                        </th>
-                                    </tr>
-                                        {% endfor %}
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
                 <div class="col-12 col-lg-6">
                     <div class="card card-statistics">
-                        <div class="card-header">
+                        <div class="card-header add-btn">
                             <div class="card-heading">
-                                <h4 class="card-title">Table Head Light</h4>
+                                <h4 class="text-secondary">E-mail ünvanları</h4>
                             </div>
+                            <a class="btn btn-square btn-xs btn-success" href="{% url 'dashboard:addemail' %}">Yeni
+                                e-mail</a>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table class="table mb-0">
                                     <thead class="thead-light">
                                     <tr>
-                                        <th scope="col">#</th>
-                                        <th scope="col">First</th>
-                                        <th scope="col">Last</th>
-                                        <th scope="col">Handle</th>
+                                        <th scope="col">E-mail</th>
+                                        <th scope="col"></th>
+                                        <th scope="col"></th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr>
-                                        <th scope="row">1</th>
-                                        <td>Mark</td>
-                                        <td>Otto</td>
-                                        <td>@mdo</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">2</th>
-                                        <td>Jacob</td>
-                                        <td>Thornton</td>
-                                        <td>@fat</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">3</th>
-                                        <td>Larry</td>
-                                        <td>the Bird</td>
-                                        <td>@twitter</td>
-                                    </tr>
+                                    {% for email in emails %}
+                                        <tr>
+                                            <th scope="row">{{ email.email }}</th>
+                                            <th scope="row" class="btn_cell">
+                                                <a href="{% url 'dashboard:updateemail' email.pk %}"
+                                                   class="btn btn-icon btn-square btn-success btn-xs"><i
+                                                        class="fa fa-pencil"></i></a>
+                                            </th>
+                                            <th scope="row" class="btn_cell">
+                                                <a href="{% url 'dashboard:deleteemail' email.pk %}"
+                                                   class="btn btn-icon btn-square btn-danger btn-xs"><i
+                                                        class="fa fa-trash"></i></a>
+                                            </th>
+                                        </tr>
+                                    {% endfor %}
                                     </tbody>
                                 </table>
                             </div>
                         </div>
                     </div>
                 </div>
+
                 <div class="col-12 col-lg-6">
                     <div class="card card-statistics">
-                        <div class="card-header">
+                        <div class="card-header add-btn">
                             <div class="card-heading">
-                                <h4 class="card-title">Table Head Light</h4>
+                                <h4 class="text-secondary">Sosial media</h4>
                             </div>
+                            <a class="btn btn-square btn-xs btn-success" href="{% url 'dashboard:addsocial' %}">Yeni
+                                media</a>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table class="table mb-0">
                                     <thead class="thead-light">
                                     <tr>
-                                        <th scope="col">#</th>
-                                        <th scope="col">First</th>
-                                        <th scope="col">Last</th>
-                                        <th scope="col">Handle</th>
+                                        <th scope="col">Media adı</th>
+                                        <th scope="col">Link</th>
+                                        <th scope="col">Icon</th>
+                                        <th scope="col"></th>
+                                        <th scope="col"></th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr>
-                                        <th scope="row">1</th>
-                                        <td>Mark</td>
-                                        <td>Otto</td>
-                                        <td>@mdo</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">2</th>
-                                        <td>Jacob</td>
-                                        <td>Thornton</td>
-                                        <td>@fat</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">3</th>
-                                        <td>Larry</td>
-                                        <td>the Bird</td>
-                                        <td>@twitter</td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 col-lg-6">
-                    <div class="card card-statistics">
-                        <div class="card-header">
-                            <div class="card-heading">
-                                <h4 class="card-title">Table Head Light</h4>
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table mb-0">
-                                    <thead class="thead-light">
-                                    <tr>
-                                        <th scope="col">#</th>
-                                        <th scope="col">First</th>
-                                        <th scope="col">Last</th>
-                                        <th scope="col">Handle</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr>
-                                        <th scope="row">1</th>
-                                        <td>Mark</td>
-                                        <td>Otto</td>
-                                        <td>@mdo</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">2</th>
-                                        <td>Jacob</td>
-                                        <td>Thornton</td>
-                                        <td>@fat</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">3</th>
-                                        <td>Larry</td>
-                                        <td>the Bird</td>
-                                        <td>@twitter</td>
-                                    </tr>
+                                    {% for social in socials %}
+                                        <tr>
+                                            <th scope="row">{{ social.social_name }}</th>
+                                            <th scope="row">{{ social.social_link }}</th>
+                                            <th><i class="fa {{ social.social_icon }}"></i></th>
+                                            <th scope="row" class="btn_cell">
+                                                <a href="{% url 'dashboard:updatesocial' social.pk %}"
+                                                   class="btn btn-icon btn-square btn-success btn-xs">
+                                                    <i class="fa fa-pencil"></i>
+                                                </a>
+                                            </th>
+                                            <th scope="row" class="btn_cell">
+                                                <a href="{% url 'dashboard:deletemedial' social.pk %}"
+                                                   class="btn btn-icon btn-square btn-danger btn-xs"><i
+                                                        class="fa fa-trash"></i></a>
+                                            </th>
+                                        </tr>
+                                    {% endfor %}
                                     </tbody>
                                 </table>
                             </div>
