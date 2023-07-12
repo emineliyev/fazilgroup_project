@@ -42,7 +42,7 @@ class PhoneUpdateView(SuccessMessageMixin, UpdateView):
     model = Phone
     template_name = 'dashboard/parameters/updatenum.html'
     success_url = reverse_lazy('dashboard:contacts')
-    success_message = 'Telefon nömrəsi uğurla dəyişdirildi!'
+    success_message = 'Telefon nömrəsi uğurla yeniləndi!'
 
     def get_context_data(self, **kwargs):
         context = super(PhoneUpdateView, self).get_context_data()
@@ -76,7 +76,7 @@ class EmailUpdateView(SuccessMessageMixin, UpdateView):
     model = Email
     template_name = 'dashboard/parameters/updateemail.html'
     success_url = reverse_lazy('dashboard:contacts')
-    success_message = 'E-mail ünvanı uğurla dəyişdirildi!'
+    success_message = 'E-mail ünvanı uğurla yeniləndi!'
 
     def get_context_data(self, **kwargs):
         context = super(EmailUpdateView, self).get_context_data()
@@ -108,7 +108,7 @@ class SocialUpdateView(SuccessMessageMixin, UpdateView):
     model = Social
     template_name = 'dashboard/parameters/updatemedia.html'
     success_url = reverse_lazy('dashboard:contacts')
-    success_message = 'Media uğurla dəyişdirildi!'
+    success_message = 'Media uğurla yeniləndi!'
 
     def get_context_data(self, **kwargs):
         context = super(SocialUpdateView, self).get_context_data()
@@ -130,12 +130,30 @@ class ParameterCreateView(SuccessMessageMixin, CreateView):
     form_class = ParameterCreateForm
     template_name = 'dashboard/parameters/addcontact.html'
     success_url = reverse_lazy('dashboard:contacts')
-    success_message = 'Əlaqə məlumatı əlavə edildi!'
+    success_message = 'Əlaqə məlumatları əlavə edildi!'
 
     def get_context_data(self, **kwargs):
         context = super(ParameterCreateView, self).get_context_data()
         return context
 
+
+class ParameterUpdateView(SuccessMessageMixin, UpdateView):
+    form_class = ParameterCreateForm
+    model = Parameters
+    template_name = 'dashboard/parameters/updateparameter.html'
+    success_url = reverse_lazy('dashboard:contacts')
+    success_message = 'Əlaqə məlumatları uğurla yeniləndi!'
+
+    def get_context_data(self, **kwargs):
+        context = super(ParameterUpdateView, self).get_context_data()
+        return context
+
+
+def delete_contact(request, parameter_id):
+    social = Parameters.objects.get(id=parameter_id)
+    social.delete()
+    messages.success(request, 'Əlaqə məlumatı uğurla silindi!')
+    return redirect('dashboard:contacts')
 
 #     PARAMETERS END
 

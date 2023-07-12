@@ -1,4 +1,5 @@
 from django import forms
+
 from parameters.models import Phone, Email, Social, Parameters
 
 
@@ -22,7 +23,7 @@ class EmailCreateForm(forms.ModelForm):
         model = Email
         fields = ('email',)
         widgets = {
-            'email': forms.TextInput(attrs={'class': 'form-control', 'id': 'uemail', 'name': 'uemail',
+            'email': forms.EmailInput(attrs={'class': 'form-control', 'id': 'uemail', 'name': 'uemail',
                                             'aria-describedby': 'uemail-error', 'aria-invalid': 'true'})
         }
 
@@ -45,15 +46,19 @@ class SocialCreateForm(forms.ModelForm):
 
 #     PARAMETERS START
 class ParameterCreateForm(forms.ModelForm):
+    phone = forms.ModelMultipleChoiceField(queryset=Phone.objects.all(), widget=forms.CheckboxSelectMultiple)
+    email = forms.ModelMultipleChoiceField(queryset=Email.objects.all(), widget=forms.CheckboxSelectMultiple)
+    social = forms.ModelMultipleChoiceField(queryset=Social.objects.all(), widget=forms.CheckboxSelectMultiple)
+
     class Meta:
         model = Parameters
         fields = ('address', 'iframe_map', 'phone', 'email', 'social')
         widgets = {
-            'address': forms.TextInput(attrs={'class': 'form-control'}),
-            'iframe_map': forms.TextInput(attrs={'class': 'form-control'}),
-            'phone': forms.SelectMultiple(attrs={'class': 'form-control'}),
-            'email': forms.SelectMultiple(attrs={'class': 'form-control'}),
-            'social': forms.SelectMultiple(attrs={'class': 'form-control'}),
+            'address': forms.TextInput(attrs={'class': 'form-control mb-2'}),
+            'iframe_map': forms.TextInput(attrs={'class': 'form-control mb-2'}),
+            'phone': forms.SelectMultiple(attrs={'class': 'form-control mb-2 text-primary'}),
+            'email': forms.SelectMultiple(attrs={'class': 'form-control mb-2 text-primary'}),
+            'social': forms.SelectMultiple(attrs={'class': 'form-control mb-2 text-primary'}),
         }
 
 #     PARAMETERS END

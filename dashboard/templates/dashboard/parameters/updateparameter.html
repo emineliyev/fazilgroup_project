@@ -13,12 +13,14 @@
                         <div class="breadcrumb-bar align-items-center">
                             <nav>
                                 <ol class="breadcrumb p-0 m-b-0">
-                                    <li class="breadcrumb-item"><a href="{% url 'dashboard:index' %}"><i
-                                            class="ti ti-home"></i></a></li>
-                                    <li class="breadcrumb-item"><a href="{% url 'dashboard:contacts' %}">Əlaqə
-                                        məlumatları</a></li>
-                                    <li class="breadcrumb-item active text-primary" aria-current="page">yeni
-                                        məlumatlar
+                                    <li class="breadcrumb-item">
+                                        <a href="{% url 'dashboard:index' %}"><i class="ti ti-home"></i></a>
+                                    </li>
+                                    <li class="breadcrumb-item">
+                                        <a href="{% url 'dashboard:contacts' %}">Əlaqə məlumatları</a>
+                                    </li>
+                                    <li class="breadcrumb-item active text-primary" aria-current="page">
+                                        {{ parameters.address }}
                                     </li>
                                 </ol>
                             </nav>
@@ -32,7 +34,7 @@
                         <div class="card card-statistics">
                             <div class="card-header">
                                 <div class="card-heading">
-                                    <h4 class="text-secondary">Yeni məlumatlar</h4>
+                                    <h4 class="text-secondary">Məlumatların yenilənməsi</h4>
                                 </div>
                             </div>
                             <div class="card-body">
@@ -72,7 +74,7 @@
                                             {{ form.social }}
                                         </div>
                                     </div>
-                                    <button type="submit" class="btn btn-square btn-success">Əlavə et</button>
+                                    <button type="submit" class="btn btn-square btn-success">Yadda saxla</button>
                                 </form>
                             </div>
                         </div>

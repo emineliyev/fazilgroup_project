@@ -1,7 +1,8 @@
 from django.urls import path
 
 from .views import index, ContactsListView, PhoneCreateView, PhoneUpdateView, delete_phone, EmailCreateView, \
-    EmailUpdateView, delete_email, SocialCreateView, SocialUpdateView, delete_media, ParameterCreateView
+    EmailUpdateView, delete_email, SocialCreateView, SocialUpdateView, delete_media, ParameterCreateView, \
+    delete_contact, ParameterUpdateView
 
 app_name = 'dashboard'
 urlpatterns = [
@@ -27,6 +28,8 @@ urlpatterns = [
     # SOCIAL END
 
     # CONTACT START
-    path('add-contact/', ParameterCreateView.as_view(), name='addcontact')
+    path('add-contact/', ParameterCreateView.as_view(), name='addcontact'),
+    path('parameter-update/<int:pk>/', ParameterUpdateView.as_view(), name='parameterupdate'),
+    path('delete-contact/<int:parameter_id>/', delete_contact, name='deletecontact')
     # CONTACT END
 ]

@@ -4,15 +4,24 @@ from django.db import models
 class Phone(models.Model):
     phone = models.CharField(max_length=60, verbose_name='Telefon')
 
+    def __str__(self):
+        return str(self.phone)
+
 
 class Email(models.Model):
     email = models.EmailField(verbose_name='E-mail')
+
+    def __str__(self):
+        return str(self.email)
 
 
 class Social(models.Model):
     social_name = models.CharField(max_length=60, verbose_name='Şəbəkə adı')
     social_icon = models.CharField(max_length=60, verbose_name='Şəbəkə ikonu')
     social_link = models.URLField(verbose_name='Şəbəkə linki')
+
+    def __str__(self):
+        return self.social_name
 
 
 class Parameters(models.Model):

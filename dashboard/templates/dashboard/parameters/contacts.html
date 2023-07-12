@@ -51,12 +51,12 @@
                                         <tr>
                                             <th scope="row">{{ parameter.address }}</th>
                                             <th scope="row" class="btn_cell">
-                                                <a href="{% url 'dashboard:numberupdate' parameter.pk %}"
-                                                   class="btn btn-icon btn-square btn-success btn-xs"><i
+                                                <a href="{% url 'dashboard:parameterupdate' parameter.pk %}"
+                                                   class="btn btn-icon btn-square btn-primary btn-xs"><i
                                                         class="fa fa-pencil"></i></a>
                                             </th>
                                             <th scope="row" class="btn_cell">
-                                                <a href="{% url 'dashboard:deletephone' parameter.pk %}"
+                                                <a href="{% url 'dashboard:deletecontact' parameter.pk %}"
                                                    class="btn btn-icon btn-square btn-danger btn-xs"><i
                                                         class="fa fa-trash"></i></a>
                                             </th>
@@ -94,7 +94,7 @@
                                             <th scope="row">{{ phone.phone }}</th>
                                             <th scope="row" class="btn_cell">
                                                 <a href="{% url 'dashboard:numberupdate' phone.pk %}"
-                                                   class="btn btn-icon btn-square btn-success btn-xs"><i
+                                                   class="btn btn-icon btn-square btn-primary btn-xs"><i
                                                         class="fa fa-pencil"></i></a>
                                             </th>
                                             <th scope="row" class="btn_cell">
@@ -136,7 +136,7 @@
                                             <th scope="row">{{ email.email }}</th>
                                             <th scope="row" class="btn_cell">
                                                 <a href="{% url 'dashboard:updateemail' email.pk %}"
-                                                   class="btn btn-icon btn-square btn-success btn-xs"><i
+                                                   class="btn btn-icon btn-square btn-primary btn-xs"><i
                                                         class="fa fa-pencil"></i></a>
                                             </th>
                                             <th scope="row" class="btn_cell">
@@ -182,7 +182,7 @@
                                             <th><i class="fa {{ social.social_icon }}"></i></th>
                                             <th scope="row" class="btn_cell">
                                                 <a href="{% url 'dashboard:updatesocial' social.pk %}"
-                                                   class="btn btn-icon btn-square btn-success btn-xs">
+                                                   class="btn btn-icon btn-square btn-primary btn-xs">
                                                     <i class="fa fa-pencil"></i>
                                                 </a>
                                             </th>
