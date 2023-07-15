@@ -26,58 +26,89 @@
                     </div>
                 </div>
             </div>
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="card card-statistics">
-                            <div class="card-header">
-                                <div class="card-heading">
-                                    <h4 class="text-secondary">Yeni məlumatlar</h4>
-                                </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card card-statistics">
+                        <div class="card-header">
+                            <div class="card-heading">
+                                <h4 class="text-secondary">Yeni məlumatlar</h4>
                             </div>
-                            <div class="card-body">
-                                <form method="post">
-                                    {% csrf_token %}
-                                    <div class="form-group row">
-                                        <div class="col-sm-12">
-                                            <label class="control-label" for="{{ form.address.id_for_label }}">
-                                                Ünvan
-                                            </label>
-                                            {{ form.address }}
-                                        </div>
-                                        <div class="col-sm-12">
-                                            <label class="control-label" for="{{ form.iframe_map.id_for_label }}">
-                                                İframe
-                                            </label>
-                                            {{ form.iframe_map }}
-                                        </div>
-                                        <div class="col-sm-12">
-                                            <label class="control-label" for="{{ form.phone.id_for_label }}">
-                                                Telefon nörələri
-                                            </label>
-                                            {{ form.phone }}
-                                            <hr>
-                                        </div>
-                                        <div class="col-sm-12">
-                                            <label class="control-label" for="{{ form.email.id_for_label }}">
-                                                E-mail
-                                            </label>
-                                            {{ form.email }}
-                                            <hr>
-                                        </div>
-                                        <div class="col-sm-12">
-                                            <label class="control-label" for="{{ form.social.id_for_label }}">
-                                                Sosial media
-                                            </label>
-                                            {{ form.social }}
-                                        </div>
+                        </div>
+                        <div class="card-body">
+                            <form method="post">
+                                {% csrf_token %}
+                                <div class="form-group row">
+                                    <div class="col-sm-12">
+                                        <label class="control-label" for="{{ form.address.id_for_label }}">
+                                            Ünvan
+                                        </label>
+                                        {{ form.address }}
                                     </div>
-                                    <button type="submit" class="btn btn-square btn-success">Əlavə et</button>
-                                </form>
-                            </div>
+                                    <div class="col-sm-12">
+                                        <label class="control-label" for="{{ form.iframe_map.id_for_label }}">
+                                            İframe
+                                        </label>
+                                        {{ form.iframe_map }}
+                                    </div>
+
+                                    <div class="col-sm-12">
+                                        <label class="control-label" for="{{ form.phone.id_for_label }}">
+                                            Telefon nörələri
+                                        </label>
+                                        {% with phones.count as phone %}
+                                            {% if phone > 0 %}
+                                                {{ form.phone }}
+                                            {% else %}
+                                                <br>
+                                                <a class="btn btn-square btn-xs btn-success"
+                                                   href="{% url 'dashboard:addphone' %}" target="_blank">
+                                                    <i class="fa fa-plus"></i>
+                                                </a>
+                                            {% endif %}
+                                        {% endwith %}
+                                        <hr>
+                                    </div>
+
+                                    <div class="col-sm-12">
+                                        <label class="control-label" for="{{ form.email.id_for_label }}">
+                                            E-mail
+                                        </label>
+                                        {% with emails.count as email %}
+                                            {% if email > 0 %}
+                                                {{ form.email }}
+                                            {% else %}
+                                                <br>
+                                                <a class="btn btn-square btn-xs btn-success"
+                                                   href="{% url 'dashboard:addemail' %}">
+                                                    <i class="fa fa-plus"></i>
+                                                </a>
+                                            {% endif %}
+                                        {% endwith %}
+                                        <hr>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <label class="control-label" for="{{ form.social.id_for_label }}">
+                                            Sosial media
+                                        </label>
+                                        {% with socials.count as social %}
+                                            {% if social > 0 %}
+                                                {{ form.social }}
+                                            {% else %}
+                                                <br>
+                                                <a class="btn btn-square btn-xs btn-success"
+                                                   href="{% url 'dashboard:addsocial' %}">
+                                                    <i class="fa fa-plus"></i>
+                                                </a>
+                                            {% endif %}
+                                        {% endwith %}
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-square btn-success mt-3">Əlavə et</button>
+                            </form>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 {% endblock %}

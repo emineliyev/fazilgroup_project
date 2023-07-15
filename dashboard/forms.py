@@ -1,10 +1,12 @@
 from django import forms
-
 from parameters.models import Phone, Email, Social, Parameters
+from products.models import Category
 
 
 # PARAMETERS START
 #     PHONE START
+
+
 class PhoneCreateForm(forms.ModelForm):
     class Meta:
         model = Phone
@@ -64,3 +66,24 @@ class ParameterCreateForm(forms.ModelForm):
 #     PARAMETERS END
 
 # PARAMETERS END
+
+# PRODUCT AND CATEGORY START
+
+
+class CategoryCreateForm(forms.ModelForm):
+    class Meta:
+        model = Category
+        fields = ('name',)
+        widgets = {
+            'name': forms.TextInput(attrs={'class': 'form-control mb-2 text-primary'}),
+        }
+
+
+class SubCategoryCreateForm(forms.ModelForm):
+    class Meta:
+        model = Category
+        fields = ('name', 'parent')
+        widgets = {
+            'name': forms.TextInput(attrs={'class': 'form-control mb-2 text-primary'}),
+            'parent': forms.Select(attrs={'class': 'form-control mb-2 text-primary'}),
+        }

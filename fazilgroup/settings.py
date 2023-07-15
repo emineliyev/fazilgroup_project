@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
     'certificates.apps.CertificatesConfig',
     'dashboard.apps.DashboardConfig',
     'parameters.apps.ParametersConfig',
@@ -44,6 +45,7 @@ INSTALLED_APPS = [
     'projects.apps.ProjectsConfig',
     'services.apps.ServicesConfig',
     'sliders.apps.SlidersConfig',
+    'mptt',
 ]
 
 MIDDLEWARE = [

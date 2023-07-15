@@ -8,16 +8,18 @@
                 <div class="col-md-12 m-b-30">
                     <div class="d-block d-lg-flex flex-nowrap align-items-center">
                         <div class="page-title mr-4 pr-4 border-right">
-                            <h3>Sosial media</h3>
+                            <h3>Yeni kateqoriya</h3>
                         </div>
                         <div class="breadcrumb-bar align-items-center">
                             <nav>
                                 <ol class="breadcrumb p-0 m-b-0">
                                     <li class="breadcrumb-item"><a href="{% url 'dashboard:index' %}"><i
                                             class="ti ti-home"></i></a></li>
-                                    <li class="breadcrumb-item"><a href="{% url 'dashboard:contacts' %}">Əlaqə
-                                        məlumatları</a></li>
-                                    <li class="breadcrumb-item active text-primary" aria-current="page">yeni media</li>
+                                    <li class="breadcrumb-item"><a href="{% url 'dashboard:categorylist' %}">Kateqoriyalar</a>
+                                    </li>
+                                    <li class="breadcrumb-item active text-primary" aria-current="page">yeni
+                                        kateqoriya
+                                    </li>
                                 </ol>
                             </nav>
                         </div>
@@ -27,36 +29,29 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="card card-statistics">
-                        <div class="card-header">
-                            <div class="card-heading">
-                                <h4 class="text-secondary">Yeni media</h4>
-                            </div>
-                        </div>
                         <div class="card-body">
                             <form method="post">
                                 {% csrf_token %}
                                 <div class="form-group row">
                                     <div class="col-sm-12">
-                                        <label class="control-label" for="{{ form.social_name.id_for_label }}">Mediad
-                                            adı</label>
-                                        {{ form.social_name }}
+                                        <label class="control-label" for="{{ form.name.id_for_label }}">
+                                            Alt kateqoriya adı
+                                        </label>
+                                        {{ form.name }}
                                     </div>
                                     <div class="col-sm-12">
-                                        <label class="control-label" for="{{ form.social_icon.id_for_label }}">Mediad
-                                            ikonu</label>
-                                        {{ form.social_icon }}
-                                    </div>
-                                    <div class="col-sm-12">
-                                        <label class="control-label" for="{{ form.social_link.id_for_label }}">Mediad
-                                            linki</label>
-                                        {{ form.social_link }}
+                                        <label class="control-label" for="{{ form.parent.id_for_label }}">
+                                            Kateqoriya adı
+                                        </label>
+                                        {{ form.parent }}
                                     </div>
                                 </div>
-                                <button class="btn btn-square btn-success">Əlavə et</button>
+                                <button type="submit" class="btn btn-square btn-success mt-3">Əlavə et</button>
                             </form>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 {% endblock %}

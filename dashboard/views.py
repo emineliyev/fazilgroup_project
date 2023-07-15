@@ -3,8 +3,10 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView
-from dashboard.forms import PhoneCreateForm, EmailCreateForm, SocialCreateForm, ParameterCreateForm
+from dashboard.forms import PhoneCreateForm, EmailCreateForm, SocialCreateForm, ParameterCreateForm, CategoryCreateForm, \
+    SubCategoryCreateForm
 from parameters.models import Phone, Email, Social, Parameters
+from products.models import Product, Category
 
 
 def index(request):
@@ -124,8 +126,6 @@ def delete_media(request, social_id):
 
 
 #     PARAMETERS START
-
-
 class ParameterCreateView(SuccessMessageMixin, CreateView):
     form_class = ParameterCreateForm
     template_name = 'dashboard/parameters/addcontact.html'
@@ -134,6 +134,10 @@ class ParameterCreateView(SuccessMessageMixin, CreateView):
 
     def get_context_data(self, **kwargs):
         context = super(ParameterCreateView, self).get_context_data()
+        context['phones'] = Phone.objects.all()
+        context['parameters'] = Parameters.objects.all()
+        context['emails'] = Email.objects.all()
+        context['socials'] = Social.objects.all()
         return context
 
 
@@ -157,7 +161,57 @@ def delete_contact(request, parameter_id):
 
 #     PARAMETERS END
 
-
-
-
 # PARAMETERS END
+
+
+# PRODUCT AND CATEGORY START
+
+# PRODUCT
+class ProductListView(ListView):
+    model = Product
+    template_name = 'dashboard/product/product-list.html'
+    context_object_name = 'products'
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super(ProductListView, self).get_context_data()
+        return context
+
+
+# CATEGORY
+class CategoryListView(ListView):
+    model = Category
+    template_name = 'dashboard/product/category-list.html'
+    context_object_name = 'categories'
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super(CategoryListView, self).get_context_data()
+        return context
+
+
+class CategoryCreateView(SuccessMessageMixin, CreateView):
+    form_class = CategoryCreateForm
+    template_name = 'dashboard/product/create-category.html'
+    success_url = reverse_lazy('dashboard:categorylist')
+    success_message = 'Kateqoriya uğurla əlavə edildi!'
+
+    def get_context_data(self, **kwargs):
+        context = super(CategoryCreateView, self).get_context_data()
+        return context
+
+
+class SubCategoryCreateView(SuccessMessageMixin, CreateView):
+    form_class = SubCategoryCreateForm
+    template_name = 'dashboard/product/create-sub-category.html'
+    success_url = reverse_lazy('dashboard:categorylist')
+    success_message = 'Alt kateqoriya uğurla əlavə edildi!'
+
+    def get_context_data(self, **kwargs):
+        context = super(SubCategoryCreateView, self).get_context_data()
+        return context
+
+
+def delete_category(request, category_id):
+    category = Category.objects.get(id=category_id)
+    category.delete()
+    messages.success(request, 'Kateqoriya uğurla silindi!')
+    return redirect('dashboard:category-list')

@@ -1,0 +1,66 @@
+{% extends 'dashboard/base.html' %}
+{% load static %}
+{% block content %}
+    <div class="app-main">
+        <div class="container-fluid">
+            <div class="row">
+                {% include 'inc/message.html' %}
+                <div class="col-md-12 m-b-30">
+                    <div class="d-block d-lg-flex flex-nowrap align-items-center">
+                        <div class="page-title mr-4 pr-4 border-right">
+                            <h3>Kateqoriyalar</h3>
+                        </div>
+                        <div class="breadcrumb-bar align-items-center">
+                            <nav>
+                                <ol class="breadcrumb p-0 m-b-0">
+                                    <li class="breadcrumb-item"><a href="{% url 'dashboard:index' %}"><i
+                                            class="ti ti-home"></i></a></li>
+                                    <li class="breadcrumb-item active text-primary" aria-current="page">Kateqoriya
+                                        siyahısı
+                                    </li>
+                                </ol>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="row nestable-contant nestable-wrapper">
+                        <div class="col-lg-6">
+                            <div class="card card-statistics">
+                                <div class="card-header">
+                                    <a href="{% url 'dashboard:createcategory' %}" class="btn btn-square btn-success">Yeni
+                                        kateqoriya</a>
+                                    <a href="{% url 'dashboard:createsubcategory' %}" class="btn btn-square btn-success">Yeni alt kateqoriya</a>
+                                </div>
+
+                                <div class="card-body">
+
+                                    <div class="dd" id="nestable">
+                                        {% load mptt_tags %}
+
+                                        <ol class="dd-list">
+                                            {% recursetree categories %}
+
+                                            <li class="dd-item dd-collapsed" data-id="2">
+                                                <div class="dd-handle">{{ node.name }} <a href="">Del</a></div>
+                                                {% if not node.is_leaf_node %}
+                                                <ol class="dd-list">
+                                                       {{ children }}
+                                                </ol>
+                                                {% endif %}
+                                            </li>
+                                            {% endrecursetree %}
+                                        </ol>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

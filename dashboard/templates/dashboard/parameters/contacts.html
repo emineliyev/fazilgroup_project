@@ -33,8 +33,15 @@
                             <div class="card-heading">
                                 <h4 class="text-secondary">Əlaqə məlumatları</h4>
                             </div>
-                            <a class="btn btn-square btn-xs btn-success" href="{% url 'dashboard:addcontact' %}">Yeni
-                                əlaqə</a>
+
+                            {% with parameters.count as param %}
+                                {% if param < 1 %}
+                                    <a class="btn btn-square btn-xs btn-success"
+                                       href="{% url 'dashboard:addcontact' %}">
+                                        Yeni əlaqə
+                                    </a>
+                                {% endif %}
+                            {% endwith %}
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -57,8 +64,9 @@
                                             </th>
                                             <th scope="row" class="btn_cell">
                                                 <a href="{% url 'dashboard:deletecontact' parameter.pk %}"
-                                                   class="btn btn-icon btn-square btn-danger btn-xs"><i
-                                                        class="fa fa-trash"></i></a>
+                                                   class="btn btn-icon btn-square btn-danger btn-xs" id="sweetalert-08">
+                                                    <i class="fa fa-trash"></i>
+                                                </a>
                                             </th>
                                         </tr>
                                     {% endfor %}
