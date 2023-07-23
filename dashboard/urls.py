@@ -3,7 +3,7 @@ from django.urls import path
 from .views import index, ContactsListView, PhoneCreateView, PhoneUpdateView, delete_phone, EmailCreateView, \
     EmailUpdateView, delete_email, SocialCreateView, SocialUpdateView, delete_media, ParameterCreateView, \
     delete_contact, ParameterUpdateView, ProductListView, CategoryListView, CategoryCreateView, delete_category, \
-    SubCategoryCreateView
+    SubCategoryCreateView, CategoryOrderView
 
 app_name = 'dashboard'
 urlpatterns = [
@@ -42,6 +42,7 @@ urlpatterns = [
     path('create-category/', CategoryCreateView.as_view(), name='createcategory'),
     path('create-sub-category/', SubCategoryCreateView.as_view(), name='createsubcategory'),
     path('delete-category/<int:category_id>/', delete_category, name='deletecategory'),
+    path('category/name/', CategoryOrderView.as_view(), name='module_order')
 
     # PRODUCT END
 ]

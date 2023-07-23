@@ -1,8 +1,11 @@
 from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
 from django.shortcuts import render, redirect
+from braces.views import CsrfExemptMixin, JsonRequestResponseMixin
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView
+from django.views.generic.base import View
+
 from dashboard.forms import PhoneCreateForm, EmailCreateForm, SocialCreateForm, ParameterCreateForm, CategoryCreateForm, \
     SubCategoryCreateForm
 from parameters.models import Phone, Email, Social, Parameters
@@ -208,6 +211,13 @@ class SubCategoryCreateView(SuccessMessageMixin, CreateView):
     def get_context_data(self, **kwargs):
         context = super(SubCategoryCreateView, self).get_context_data()
         return context
+
+
+class CategoryOrderView(CsrfExemptMixin, JsonRequestResponseMixin, View):
+    def post(self, request):
+        for id in self.request_json.items():
+            Category.objects.filter(id=id).update(id=id)
+        return self.render_json_response({'saved': 'OK'})
 
 
 def delete_category(request, category_id):
