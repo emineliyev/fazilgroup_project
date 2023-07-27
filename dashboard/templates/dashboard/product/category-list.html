@@ -38,23 +38,33 @@
 
                             <div class="card-body">
 
-                                <div class="dd" id="nestable">
-                                    {% load mptt_tags %}
-                                    <ol id="modules" class="dd-list">
-                                        {% recursetree categories %}
+<!--                                <div class="dd" id="nestable">-->
+<!--                                    {% load mptt_tags %}-->
+<!--                                    <ol class="dd-list" id="modules">-->
+<!--                                        {% recursetree categories %}-->
+<!--                                        <li id="{{ node.id }}" class="dd-item dd-collapsed" data-id="{{ node.id }}">-->
+<!--                                            <div class="dd-handle order">{{ node.name }}: {{ node.order|add:1 }}</div>-->
+<!--                                            {% if not node.is_leaf_node %}-->
+<!--                                            <ol class="dd-list order">-->
+<!--                                                {{ children }}-->
+<!--                                            </ol>-->
+<!--                                            {% endif %}-->
+<!--                                        </li>-->
+<!--                                        {% endrecursetree %}-->
+<!--                                    </ol>-->
+<!--                                </div>-->
+                                <ul id="modules">
+                                    {% for category in categories.all %}
 
-                                        <li id="{{ node.id }}" class="dd-item dd-collapsed" data-id="{{ node.id }}">
-                                            <div class="dd-handle order">{{ node.name }}</div>
-                                            {% if not node.is_leaf_node %}
-                                            <ol class="dd-list order">
-                                                {{ children }}
-                                            </ol>
-                                            {% endif %}
-                                        </li>
-                                        {% endrecursetree %}
-                                    </ol>
+                                    <li data-id="{{ category.id }}" {% if m == module %}class="selected"{% endif %}>
+                                         Module <span class="order">{{ category.order|add:1 }}</span>
+                                        <br>
+                                        {{ category.name }}
+                                    </li>
+                                    {% endfor %}
 
-                                </div>
+                                </ul>
+
                             </div>
                         </div>
                     </div>
@@ -75,7 +85,7 @@
       mode: 'same-origin'
   }
 
-  const moduleOrderUrl = '{% url "module_order" %}';
+  const moduleOrderUrl = '{% url "dashboard:module_order" %}';
 
   sortable('#modules', {
     forcePlaceholderSize: true,
@@ -84,15 +94,15 @@
 
     modulesOrder = {};
     var modules = document.querySelectorAll('#modules li');
-    modules.forEach(function (category, index) {
+    modules.forEach(function (node, index) {
 
-      modulesOrder[.dataset.id] = index;
+      modulesOrder[node.dataset.id] = index;
 
-      module.querySelector('category.order').innerHTML = index + 1;
+      node.querySelector('.order').innerHTML = index + 1;
 
       options['body'] = JSON.stringify(modulesOrder);
-
-
+      // send HTTP request
+        console.log(e.detail);
       fetch(moduleOrderUrl, options)
     });
   });

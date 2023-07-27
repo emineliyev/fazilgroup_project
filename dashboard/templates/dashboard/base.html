@@ -74,7 +74,15 @@
 
 <!-- custom app -->
 <script src="{% static 'dashboard/js/app.js' %}"></script>
-{% block include_js %}{% endblock %}
+{% block include_js %}
+{% endblock %}
+<script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+        // DOM loaded
+        {% block domready %}
+        {% endblock %}
+    })
+</script>
 <script>
     setTimeout(function () {
         if ($('#msg').length > 0) {

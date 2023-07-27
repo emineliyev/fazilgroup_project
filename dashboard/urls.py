@@ -42,7 +42,7 @@ urlpatterns = [
     path('create-category/', CategoryCreateView.as_view(), name='createcategory'),
     path('create-sub-category/', SubCategoryCreateView.as_view(), name='createsubcategory'),
     path('delete-category/<int:category_id>/', delete_category, name='deletecategory'),
-    path('category/name/', CategoryOrderView.as_view(), name='module_order')
+    path('product/order/', CategoryOrderView.as_view(), name='module_order')
 
     # PRODUCT END
 ]

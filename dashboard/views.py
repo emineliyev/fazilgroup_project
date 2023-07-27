@@ -215,8 +215,8 @@ class SubCategoryCreateView(SuccessMessageMixin, CreateView):
 
 class CategoryOrderView(CsrfExemptMixin, JsonRequestResponseMixin, View):
     def post(self, request):
-        for id in self.request_json.items():
-            Category.objects.filter(id=id).update(id=id)
+        for id, order in self.request_json.items():
+            Category.objects.filter(id=id).update(order=order)
         return self.render_json_response({'saved': 'OK'})
 
 

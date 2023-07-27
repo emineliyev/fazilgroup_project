@@ -2,3 +2,8 @@
     max-width: 35px;
     width: 35px;
 }
+.add-btn {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
